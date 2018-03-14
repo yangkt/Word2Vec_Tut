@@ -1,6 +1,6 @@
 # Word2Vec_Tut
 
-Word to vec tutorial by Kaggle, titled Bag of Words Meets Bags of Popcorn\n
-Uses the Google's Word2Vec for movie review.\n\n
+Word to vec tutorial by Kaggle, titled, **Bag of Words Meets Bags of Popcorn**
 
-https://www.kaggle.com/c/word2vec-nlp-tutorial
+## Link
+[This is the link to the tutorial on Kaggle ](https://www.kaggle.com/c/word2vec-nlp-tutorial)
