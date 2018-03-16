@@ -61,8 +61,8 @@ def getAvgFeatureVecs(reviews, model, num_features):
     for review in reviews:
        #
        # Print a status message every 1000th review
-       if counter%1000. == 0.:
-           print "Review %d of %d" % (counter, len(reviews))
+       #if counter%1000. == 0.:
+       #    print ("Review %d of %d") % (counter, len(reviews))
        #
        # Call the function (defined above) that makes average feature vectors
        reviewFeatureVecs[int(counter)] = makeFeatureVec(review, model, \
@@ -83,10 +83,14 @@ def getCleanReviews(reviews):
 
 if __name__ == '__main__':
 
+    path = 'C:\\Users\\Katie\\Documents\\Data_Science\\word2vec_tut\\part2'
     # Read data from files
-    train = pd.read_csv( os.path.join(os.path.dirname(__file__), 'data', 'labeledTrainData.tsv'), header=0, delimiter="\t", quoting=3 )
-    test = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'testData.tsv'), header=0, delimiter="\t", quoting=3 )
-    unlabeled_train = pd.read_csv( os.path.join(os.path.dirname(__file__), 'data', "unlabeledTrainData.tsv"), header=0,  delimiter="\t", quoting=3 )
+    train = pd.read_csv( os.path.join(os.path.dirname(path), 
+                'labeledTrainData.tsv'), header=0, delimiter="\t", quoting=3 )
+    test = pd.read_csv(os.path.join(os.path.dirname(path), 'testData.tsv'), 
+                       header=0, delimiter="\t", quoting=3 )
+    unlabeled_train = pd.read_csv( os.path.join(os.path.dirname(path), 
+                        "unlabeledTrainData.tsv"), header=0,  delimiter="\t", quoting=3 )
 
     # Verify the number of reviews that were read (100,000 in total)
     print "Read %d labeled train reviews, %d labeled test reviews, " \
@@ -107,10 +111,15 @@ if __name__ == '__main__':
     print "Parsing sentences from training set"
     for review in train["review"]:
         sentences += KaggleWord2VecUtility.review_to_sentences(review, tokenizer)
+        #don't want to have the stopwords removed in this situation because 
+        # could provide insights 
 
     print "Parsing sentences from unlabeled set"
     for review in unlabeled_train["review"]:
         sentences += KaggleWord2VecUtility.review_to_sentences(review, tokenizer)
+
+
+
 
     # ****** Set parameters and train the word2vec model
     #
@@ -123,7 +132,7 @@ if __name__ == '__main__':
     num_features = 300    # Word vector dimensionality
     min_word_count = 40   # Minimum word count
     num_workers = 4       # Number of threads to run in parallel
-    context = 10          # Context window size
+    context = 10          # Context window size, looks at 10 words at a time, rolling window
     downsampling = 1e-3   # Downsample setting for frequent words
 
     # Initialize and train the model (this will take some time)
